@@ -15,12 +15,15 @@
 #' @noRd
 get_USGS_data <- function(
     dt_rng=c("2011-01-01","2016-12-31"),
-    monitoring_location_id = c("USGS-11303500","USGS-11313405","USGS-11313434"),
+    monitoring_location_id = c("USGS-11303500","USGS-11313405","USGS-11312676"),
     parameter_codes = c("00060","72137","72137"),
     sites= c("VNS","ORB","MID"),
     verbose=FALSE
 )
 {
+  
+  # 11313434 quimby code
+  # 11312676 Middle River at Middle River
   
   last_dt <- dt_rng[2]
   first_dt <- dt_rng[1]
