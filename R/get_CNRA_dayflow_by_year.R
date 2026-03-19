@@ -1,3 +1,10 @@
+#' Title
+#'
+#' @param dt_rng date range
+#'
+#' @returns dataframe with dayflow measures from CNRA
+#' @export
+#'
 get_dayflow_data <- function(dt_rng=c("2011-01-01","2016-12-31")){
   
   dts_in <- seq.Date(dt_rng[1],dt_rng[2])
@@ -15,9 +22,9 @@ get_dayflow_data <- function(dt_rng=c("2011-01-01","2016-12-31")){
   # print(dim(dayflow_yr_sclDF))
   
   dayflowDF <- dayflow_yr_sclDF %>% 
-    filter(date >= dt_rng[1] & date <= dt_rng[2]) %>%
-    select(-Date,-X_id) %>%
-    relocate(date)
+    dplyr::filter(date >= dt_rng[1] & date <= dt_rng[2]) %>%
+    dplyr::select(-Date,-X_id) %>%
+    dplyr::relocate(date)
   
   # print(dim(dayflowDF))
   

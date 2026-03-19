@@ -1,4 +1,4 @@
-#' get_USGS_data 
+#' @title Access USGS data via  
 #'
 #' @param dt_rng character string of length 2 with default date format
 #' @param monitoring_location_id character or string with monitoring ids 'USGS-XXXXXXXX'
@@ -7,6 +7,8 @@
 #' @param verbose if TRUE, print USGS API messages, including number of remaining requests this hour
 #'
 #' @description A utils function that queries the USGS' NWIS database: https://waterdata.usgs.gov/nwis/
+#' 
+#' @details Link to usgs sites in the South Delta: https://waterdata.usgs.gov/explore/#mapCenter=37.910090880908236,-121.54037475585939&dataCollections=continuous&mapZoomLevel=11
 #'
 #' @return The return value, if any, from executing the utility.
 #' 

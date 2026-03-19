@@ -3,6 +3,6 @@
 export(calc_OMT)
 export(fah_to_cel)
 export(get_CNRA_dayflow_by_year)
+export(get_dayflow_data)
 import(dataRetrieval)
-import(dplyr)
 import(simputation)

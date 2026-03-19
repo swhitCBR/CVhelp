@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_OMT.R
 \name{calc_OMT}
 \alias{calc_OMT}
-\title{Title}
+\title{Impute missing values for OMT}
 \usage{
 calc_OMT(USGS_dat_ls_in, raw = FALSE, wide = F)
 }
@@ -17,5 +17,5 @@ calc_OMT(USGS_dat_ls_in, raw = FALSE, wide = F)
 wide- or long-form dataframe with OMT value computed (i.e., ORB + MID)
 }
 \description{
-Title
+Impute missing values for OMT
 }

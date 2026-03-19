@@ -1,11 +1,18 @@
 Package: CVhelp
-Title: What the Package Does (One Line, Title Case)
+Title: Helper functions for CVPAS and related projects
+Description: This package stores functions for accessing and compiling daily environmental data for select locations in the South Delta.
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports:
+  dplyr,
+  tidyr,
+  simputation,
+  dataRetrieval,
+  rvest
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
