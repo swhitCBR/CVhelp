@@ -73,6 +73,11 @@ env_comp <- function(
       envDat_w$OMT <- imp_obj$OMT
     }
   
+  
+  if(!detail){
+    envDat_w <- envDat_w %>% select(-OMT_imputed,-X2,-EXPORTS)
+  }
+  
   if(output=="wide"){return(envDat_w)}
   
   envDat_l <- tidyr::pivot_longer(envDat_w,cols = c("VNS","ORB","MID","MSD","CLC","OMT"),names_to = "site") %>%
