@@ -1,6 +1,11 @@
 #' Title
 #'
 #' @param dt_rng date range
+#' @description
+#' Accessing Dayflow datatables in chunks broken up by year
+#' Dayflow summary:
+#' https://water.ca.gov/Programs/Integrated-Science-and-Engineering/Compliance-Monitoring-And-Assessment/Dayflow-Data
+#' 
 #'
 #' @returns dataframe with dayflow measures from CNRA
 #' @export

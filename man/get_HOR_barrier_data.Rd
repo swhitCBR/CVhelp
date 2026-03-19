@@ -4,9 +4,11 @@
 \alias{get_HOR_barrier_data}
 \title{Title}
 \usage{
-get_HOR_barrier_data(last_year = NULL)
+get_HOR_barrier_data(dt_rng = c("2011-01-01", "2016-12-31"), last_year = NULL)
 }
 \arguments{
+\item{dt_rng}{date range}
+
 \item{last_year}{final year where daily barrier TRUE/FALSE values will be reported}
 }
 \description{

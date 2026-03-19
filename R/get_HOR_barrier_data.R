@@ -1,6 +1,7 @@
 #' Title
 #'
 #' @param last_year final year where daily barrier TRUE/FALSE values will be reported
+#' @param dt_rng date range
 #'
 #' @description
 #' Access the Head of Old River (HOR) barrier installation (start and end times), breach, and removal (start and end times)
@@ -8,11 +9,16 @@
 #' https://water.ca.gov/-/media/DWR-Website/Web-Pages/Programs/State-Water-Project/Operations-And-Maintenance/Files/Bay-Delta/South-Delta-Temporary-Barriers-Project/History/2023SpringHeadOfOldRiverSch_ADA.pdf
 #' The actual data table is taken from the USGS gitlab 'predator_filter' package files here: data/auxiliary_data/HORB_physical_schedule_1992_2021.csv 
 #'
+#' @import dplyr
 #'
-#' @returns
+#' @returns head of old river (HOR) barrier status
 #' @export
 #'
-get_HOR_barrier_data <- function(last_year=NULL){
+get_HOR_barrier_data <- function(
+    dt_rng=c("2011-01-01","2016-12-31"),
+    last_year=NULL
+    )
+  {
   HORB_scedDF_summ <- get_barrier_strt_stop()
   
   dt_ls <- list()
@@ -31,6 +37,9 @@ get_HOR_barrier_data <- function(last_year=NULL){
     date=seq.Date(paste0(min(HORB_scedDF_summ$Year),"-01-01"),
                   paste0(last_year,"-12-31")))
   barrierDF$barrierTF=barrierDF$date %in% barrier_indays_DF$date
+  
+  barrierDF <- barrierDF %>% dplyr::filter(date >= dt_rng[1] & date <= dt_rng[2])
+  
   
   return(barrierDF)
 }

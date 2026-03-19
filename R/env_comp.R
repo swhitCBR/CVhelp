@@ -26,12 +26,14 @@ env_comp <- function(
   CDEC_env_raw <- get_CDEC_data(dt_rng=dt_rng,output = "wide")
   USGS_env_raw <- get_USGS_data(dt_rng = dt_rng)
   CDEC_wyt_class_raw <- get_WYT_data(dt_rng = dt_rng)
+  HOR_barrier_raw <- get_HOR_barrier_data(dt_rng = dt_rng)
+  get_dayflow_raw <- get_dayflow_data(dt_rng = dt_rng)
 
   full_dt_arr <- data.frame(
     date=seq.Date(dt_rng[1],dt_rng[2])) %>% 
     dplyr::mutate(Year=as.numeric(format(date,"%Y")),
                   DOY=as.numeric(format(date,"%j"))) %>%
-    dplyr::filter(DOY %in% 1:250)
+    dplyr::filter(DOY %in% DOY_rng)
   # 
   # return(full_dt_arr)
   
@@ -42,7 +44,11 @@ env_comp <- function(
     dplyr::left_join(USGS_env_raw[["MID"]] %>% dplyr::rename(MID=value) %>% dplyr::select(date,MID),by="date") %>%
     dplyr::mutate(OMT = ORB + MID) %>%
     # adding wide-format CDEC data
-    dplyr::left_join(CDEC_env_raw %>% dplyr::select(date,MSD,CLC),by="date")
+    dplyr::left_join(CDEC_env_raw %>% dplyr::select(date,MSD,CLC),by="date") %>%
+    # adding barrierTF data
+    left_join(HOR_barrier_raw %>% dplyr::select(date,barrierTF),by="date") %>%
+    left_join(get_dayflow_raw %>% dplyr::select(date,SWP,CVP,OUT),by="date")
+  
 
   missing_env_raw <- data.frame(which(is.na(envDat_w),arr.ind = T)) %>%
     dplyr::mutate(site=names(envDat_w)[col],
@@ -61,7 +67,8 @@ env_comp <- function(
                 round(sum(is.na(envDat_w$OMT))/nrow(envDat_w)*100),"%)"))
   
   if(impute_OMT){
-      imp_obj <- simputation::impute_lm(dat=envDat_w,formula = OMT~VNS+ORB+MSD+CLC)
+      # imp_obj <- simputation::impute_lm(dat=envDat_w,formula = OMT~VNS+ORB+MSD+CLC)
+      imp_obj <- simputation::impute_lm(dat=envDat_w,formula = OMT~VNS+MID+MSD+CLC)
       envDat_w$OMT_imputed <- is.na(envDat_w$OMT)
       envDat_w$OMT <- imp_obj$OMT
     }
