@@ -1,4 +1,4 @@
-#' get_CDEC_data 
+#' @title Access data from specific sites from the CDEC database 
 #'
 #' @param dt_rng character string of length 2 with default date format
 #' @param cdec_sites site labels
@@ -7,7 +7,10 @@
 #' @param verbose if FALSE (default), suppress dplyr::mutate() warnings
 #' @param output type of data table output to return, "long", "wide" or "list". Defaults to "wide", which is used in env_comp()
 #'
-#' @description A utils function
+#' @description Below are important links to CDEC portals. 
+#' 
+#' https://cdec.water.ca.gov/dynamicapp/staMeta?station_id=CLC
+#' https://cdec.water.ca.gov/dynamicapp/staMeta?station_id=MSD
 #'
 #' @return The return value, if any, from executing the utility.
 #'

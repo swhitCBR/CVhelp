@@ -1,4 +1,4 @@
-#' @param title Compile environmental data for CVPAS-steelhead inputs 
+#' @title Compile environmental data for CVPAS-steelhead inputs 
 #'
 #' @param url defaults to CDEC url of water year types (WYT) 'WSIHIST'
 #' @param basin basin for WYT lookup; either 'SJ' or 'SAC' 
@@ -6,6 +6,8 @@
 #' @param DOY_rng character string
 #' @param impute_OMT if TRUE, fill in missing daily values for OMT using linear imputation ('simputation' package)
 #' @param output type of data table output to return, "long", "wide" or "list"; defaults to "wide".
+#'
+#' @seealso get_CDEC_data()
 #'
 #' @return dataframe or list with combined, daily-scale environmental variabltes
 #' 
