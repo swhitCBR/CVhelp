@@ -3,6 +3,8 @@
 export(calc_OMT)
 export(fah_to_cel)
 export(get_CNRA_dayflow_by_year)
+export(get_HOR_barrier_data)
+export(get_barrier_strt_stop)
 export(get_dayflow_data)
 import(dataRetrieval)
 import(simputation)
