@@ -22,7 +22,7 @@ get_dayflow_data <- function(dt_rng=c("2011-01-01","2016-12-31")){
 
   # return(dayflow_yr_sclDF)
   
-  dayflow_yr_sclDF$date <- as.Date(dayflow_yr_sclDF$Date,format="%m/%d/%Y")
+  dayflow_yr_sclDF$date <- as.Date(dayflow_yr_sclDF$Date,format=c("%m/%d/%Y","%Y-%m-%d"))
   
   # print(dim(dayflow_yr_sclDF))
   
@@ -84,16 +84,30 @@ get_CNRA_dayflow_by_year <- function(yr_in){
   
   if(yr_in ==2023){
     URL_out <- 
-    paste0(
+    c(
+      #2023
+      paste0(
       "https://data.cnra.ca.gov/datastore/dump/f7c1ba7f-bd64-4762-88e3-6db9b2501b38?q=&plain=False&language=simple&sort=_id+asc&filters=%7B%7D&format=csv&",
-      "fields=_id%2CYear%2CDate%2CSWP%2CCVP%2CEXPORTS%2COUT%2CX2")
+      "fields=_id%2CYear%2CDate%2CSWP%2CCVP%2CEXPORTS%2COUT%2CX2"),
+      #2024
+      paste0(
+        "https://data.cnra.ca.gov/datastore/dump/6a7cb172-fb16-480d-9f4f-0322548fee83?q=&plain=False&language=simple&sort=_id+asc&filters=%7B%7D&format=csv&",
+        "fields=_id%2CYear%2CDate%2CSWP%2CCVP%2CEXPORTS%2COUT%2CX2")
+    )
   }
   
   if(yr_in ==2024){
     URL_out <- 
-    paste0(
-      "https://data.cnra.ca.gov/datastore/dump/6a7cb172-fb16-480d-9f4f-0322548fee83?q=&plain=False&language=simple&sort=_id+asc&filters=%7B%7D&format=csv&",
-      "fields=_id%2CYear%2CDate%2CSWP%2CCVP%2CEXPORTS%2COUT%2CX2")
+    c(
+      #2024
+      paste0(
+        "https://data.cnra.ca.gov/datastore/dump/6a7cb172-fb16-480d-9f4f-0322548fee83?q=&plain=False&language=simple&sort=_id+asc&filters=%7B%7D&format=csv&",
+        "fields=_id%2CYear%2CDate%2CSWP%2CCVP%2CEXPORTS%2COUT%2CX2"),
+      #2025
+      paste0(
+        "https://data.cnra.ca.gov/datastore/dump/541fe1b7-919a-467d-ac1e-ddbb8328c8f1?q=&plain=False&language=simple&sort=_id+asc&filters=%7B%7D&format=csv&",
+        "fields=_id%2CYear%2CDate%2CSWP%2CCVP%2CEXPORTS%2COUT%2CX2")
+      )
   }
   if(yr_in ==2025){
     URL_out <- 
@@ -101,8 +115,6 @@ get_CNRA_dayflow_by_year <- function(yr_in){
       "https://data.cnra.ca.gov/datastore/dump/541fe1b7-919a-467d-ac1e-ddbb8328c8f1?q=&plain=False&language=simple&sort=_id+asc&filters=%7B%7D&format=csv&",
       "fields=_id%2CYear%2CDate%2CSWP%2CCVP%2CEXPORTS%2COUT%2CX2")
   }
-  
-  # return(URL_out)
   
   out_ls_yr = lapply(URL_out,read.csv)  
   

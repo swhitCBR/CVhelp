@@ -10,7 +10,11 @@
 #' @description Below are important links to CDEC portals. 
 #' 
 #' https://cdec.water.ca.gov/dynamicapp/staMeta?station_id=CLC
+#' site says '09/15/2009 to present' but 2009-10-29 is the first easily accessible value from the API 
+#' (others are strings with NAs)
+#'
 #' https://cdec.water.ca.gov/dynamicapp/staMeta?station_id=MSD
+#' site metadata is accurate , 2010-10-10 is the first easily accessible value from the API
 #'
 #' @return The return value, if any, from executing the utility.
 #'
@@ -24,6 +28,11 @@ get_CDEC_data <- function(
     output="wide"
 )
 {
+  
+  if(as.Date(dt_rng[1])< as.Date("2009-10-29")){
+    warning("No CLC temperature data prior to 2009-10-29 and not MSD data prior to 2010-10-10")
+    dt_rng[1] <- "2009-10-29"
+  }
   
   # https://cdec.water.ca.gov/misc/senslist.html
   
