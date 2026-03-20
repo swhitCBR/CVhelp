@@ -13,5 +13,7 @@ get_dayflow_data(dt_rng = c("2011-01-01", "2016-12-31"))
 dataframe with dayflow measures from CNRA
 }
 \description{
-Title
+Accessing Dayflow datatables in chunks broken up by year
+Dayflow summary:
+https://water.ca.gov/Programs/Integrated-Science-and-Engineering/Compliance-Monitoring-And-Assessment/Dayflow-Data
 }

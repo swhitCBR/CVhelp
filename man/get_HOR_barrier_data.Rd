@@ -11,6 +11,9 @@ get_HOR_barrier_data(dt_rng = c("2011-01-01", "2016-12-31"), last_year = NULL)
 
 \item{last_year}{final year where daily barrier TRUE/FALSE values will be reported}
 }
+\value{
+head of old river (HOR) barrier status
+}
 \description{
 Access the Head of Old River (HOR) barrier installation (start and end times), breach, and removal (start and end times)
 PDF doc with related info is here:

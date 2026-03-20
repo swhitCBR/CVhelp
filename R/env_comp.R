@@ -10,7 +10,7 @@
 #' @seealso get_CDEC_data()
 #'
 #' @return dataframe or list with combined, daily-scale environmental variabltes
-#' 
+#' @export
 #'
 env_comp <- function(
     url="https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST",
