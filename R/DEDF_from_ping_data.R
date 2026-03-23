@@ -11,7 +11,6 @@
 #' @returns detection event data frame (DEDF)
 #' @export
 #'
-#' @examples
 DEDF_from_ping_data <- function(dat_in,
                                 max_delay = ubridate::hours(1),
                                 min_detect = 2,
