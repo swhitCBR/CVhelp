@@ -8,6 +8,8 @@
 #' PDF doc with related info is here:
 #' https://water.ca.gov/-/media/DWR-Website/Web-Pages/Programs/State-Water-Project/Operations-And-Maintenance/Files/Bay-Delta/South-Delta-Temporary-Barriers-Project/History/2023SpringHeadOfOldRiverSch_ADA.pdf
 #' The actual data table is taken from the USGS gitlab 'predator_filter' package files here: data/auxiliary_data/HORB_physical_schedule_1992_2021.csv 
+#' 
+#' Spring HOR barrier not installed after 2019 b/c of high flow in 2019 and because after 2020 the barrier was not required in the NMFS BiOp on Long-term Operations of the CVP and SWP (see 'xx' comment in PDF).
 #'
 #' @import dplyr
 #'
@@ -19,24 +21,39 @@ get_HOR_barrier_data <- function(
     last_year=NULL
     )
   {
+  
+  if(any(sapply(dt_rng,function(x) as.Date(x)> as.Date("2023-10-29")))){
+    message("spring HOR barrier not installed after 2018 (run `?get_HOR_barrier_data()` for details)")
+    message("daily HOR barrier status beyond 2019-01-01 set to FALSE")
+  }
+  
+  if(any(sapply(dt_rng,function(x) as.Date(x)< as.Date("1992-04-15")))){
+    message("no spring HOR barrier information prior to 1992 (run `?get_HOR_barrier_data()` for details)")
+  }
+  
+  
   HORB_scedDF_summ <- get_barrier_strt_stop()
   
   dt_ls <- list()
   for(ii in 1:nrow(HORB_scedDF_summ)){
     dt_ls[[ii]] <- data.frame(Year=HORB_scedDF_summ$Year[ii],
-                              date=seq.Date(from = HORB_scedDF_summ$Install[ii],to = HORB_scedDF_summ$Remove[ii]))
+                              date=seq.Date(from = HORB_scedDF_summ$Install[ii],
+                                            to = HORB_scedDF_summ$Remove[ii]))
   }
   # dates where barrier=IN (by the broadest definition)
   barrier_indays_DF <- do.call(rbind,dt_ls)
   
   if(is.null(last_year)){
-    last_year=max(HORB_scedDF_summ$Year)
+    # last_year=max(HORB_scedDF_summ$Year)
+    last_year = format(as.Date(dt_rng)[2],"%Y")
   }
+
   
   barrierDF <- data.frame(
     date=seq.Date(paste0(min(HORB_scedDF_summ$Year),"-01-01"),
                   paste0(last_year,"-12-31")))
   barrierDF$barrierTF=barrierDF$date %in% barrier_indays_DF$date
+  barrierDF$barrierTF[barrierDF$date > as.Date("2019-01-01")]=FALSE
   
   barrierDF <- barrierDF %>% dplyr::filter(date >= dt_rng[1] & date <= dt_rng[2])
   
@@ -47,6 +64,10 @@ get_HOR_barrier_data <- function(
 
 
 #' Title
+#'
+#' @description
+#' Hard-coding of spring HOR barrier 
+#' 
 #'
 #' @returns table of years between 1992 and 2021 where HOR barrier was in place
 #' @export

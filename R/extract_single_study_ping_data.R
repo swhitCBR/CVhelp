@@ -1,5 +1,6 @@
 # extract
-#' @descritption Extract list of tables containing information relevant to each studyID in the sqlite3 database created for 'predator_filter' gitlab
+#' @description
+#'  Extract list of tables containing information relevant to each studyID in the sqlite3 database created for 'predator_filter' gitlab
 #'
 #' @param study corresponds to 'studyID' variable in 'studies' table of sqlite3 database 
 #' @param db location of sqllite database created for 'predator_filter' gitlab

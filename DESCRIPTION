@@ -13,6 +13,8 @@ Imports:
   tidyr,
   simputation,
   dataRetrieval,
-  rvest
+  rvest,
+  imputeTS,
+  ggplot2
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3

@@ -10,5 +10,5 @@ get_barrier_strt_stop()
 table of years between 1992 and 2021 where HOR barrier was in place
 }
 \description{
-Title
+Hard-coding of spring HOR barrier
 }

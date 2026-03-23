@@ -19,4 +19,6 @@ Access the Head of Old River (HOR) barrier installation (start and end times), b
 PDF doc with related info is here:
 https://water.ca.gov/-/media/DWR-Website/Web-Pages/Programs/State-Water-Project/Operations-And-Maintenance/Files/Bay-Delta/South-Delta-Temporary-Barriers-Project/History/2023SpringHeadOfOldRiverSch_ADA.pdf
 The actual data table is taken from the USGS gitlab 'predator_filter' package files here: data/auxiliary_data/HORB_physical_schedule_1992_2021.csv
+
+Spring HOR barrier not installed after 2019 b/c of high flow in 2019 and because after 2020 the barrier was not required in the NMFS BiOp on Long-term Operations of the CVP and SWP (see 'xx' comment in PDF).
 }

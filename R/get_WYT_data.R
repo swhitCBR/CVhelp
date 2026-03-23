@@ -16,6 +16,12 @@ get_WYT_data <- function(
     dt_rng=c("2011-01-01","2016-12-31")
 ){
   
+  # SHOULD PROBABLY USE THIS PACKAGE INSTEAD OF HOMEMADE VERSION
+  # install.packages("waterYearType")
+  # waterYearType::water_year_indices %>% 
+  #   mutate(basin=ifelse("Sacramento Valley","SAC",
+  #                       ifelse("Sacramento Valley","SJ",)))
+  
   yr_rng <- sapply(dt_rng,function(x) as.numeric(strsplit(x,split = "-")[[1]][1]))
   stopifnot(yr_rng[2]>yr_rng[1])
   # require(rvest)

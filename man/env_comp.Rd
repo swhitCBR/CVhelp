@@ -7,9 +7,11 @@
 env_comp(
   url = "https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST",
   basin = "SJ",
+  log_trans = c("VNS", "OUT"),
   dt_rng = c("2011-01-01", "2016-12-31"),
   DOY_rng = 1:250,
-  impute_OMT = TRUE,
+  impute_daily_vals = TRUE,
+  sub_MA_data = TRUE,
   output = "wide"
 )
 }
@@ -18,11 +20,15 @@ env_comp(
 
 \item{basin}{basin for WYT lookup; either 'SJ' or 'SAC'}
 
+\item{log_trans}{character string of variables to log transform}
+
 \item{dt_rng}{character string of length 2 with default date format}
 
 \item{DOY_rng}{character string}
 
-\item{impute_OMT}{if TRUE, fill in missing daily values for OMT using linear imputation ('simputation' package)}
+\item{impute_daily_vals}{if TRUE, fill in missing daily values for variables}
+
+\item{sub_MA_data}{logical, substitutes moving averages for select variables \code{c("CLC","VNS","SWP","CVP","MSD")}}
 
 \item{output}{type of data table output to return, "long", "wide" or "list"; defaults to "wide".}
 }

@@ -11,7 +11,6 @@
 #' @returns detection event data frame (DEDF)
 #' @export
 #'
-#' @examples
 rcv_det_interval_from_ping_data <- function(
                                 dat_in,
                                 max_delay = lubridate::hours(1),
