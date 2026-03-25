@@ -1,4 +1,5 @@
-# extract
+#' @title Extract example data set from db using studyID
+#' 
 #' @description
 #'  Extract list of tables containing information relevant to each studyID in the sqlite3 database created for 'predator_filter' gitlab
 #'
