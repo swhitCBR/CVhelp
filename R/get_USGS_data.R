@@ -12,7 +12,7 @@
 #'
 #' @return The return value, if any, from executing the utility.
 #' 
-#' @import dataRetrieval
+#' @importFrom dataRetrieval read_waterdata_daily 
 #'
 #' @noRd
 get_USGS_data <- function(
