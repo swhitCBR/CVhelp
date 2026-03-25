@@ -70,18 +70,23 @@ env_comp <- function(
 
   # MSD correction of blatant errors
   MSD_chk_v <- envDat_w$MSD < 3 | envDat_w$MSD > 30
-  if(any(MSD_chk_v)){
-    envDat_w$MSD <- ifelse(MSD_chk_v,NA,envDat_w$MSD)
-    }
+  envDat_w$MSD <- ifelse(MSD_chk_v,NA,envDat_w$MSD)
 
   message(paste0(nrow(missing_env_raw)," missing values found (",
                  round(nrow(missing_env_raw)/nrow(envDat_w)*100),"%)"))
+    
   if(impute_daily_vals){
     envDat_w <- impute_daily_vals(DF_w_in=envDat_w)
     message("and imputed using daily moving averages")
   }
   
-  
+  # rm_extra_vars=TRUE
+  # if(rm_extra_vars){
+  #   envDat_w <- envDat_w %>% dplyr::select(-X2,-EXPORTS)
+  #   message("removing extra columns: EXPORTS, X2")
+  # }
+    
+
   # log transform VNS and out
   if(length(log_trans)>0 & any(log_trans %in% c("VNS","ORB","MID","MSD","CLC","OMT","SWP","CVP","OUT"))){
     if( "VNS" %in% log_trans) envDat_w$VNS <- log(envDat_w$VNS)
