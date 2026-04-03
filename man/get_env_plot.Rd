@@ -8,7 +8,6 @@ get_env_plot(
   env_data_long_in,
   DOY_rng = NULL,
   highlight_years = c(2011:2016),
-  yr_high_lb = "Model_years",
   var_fact_levels = c("VNS", "OUT", "CVP", "SWP", "ORB", "MID", "OMT", "CLC", "MSD")
 )
 }
@@ -19,13 +18,23 @@ get_env_plot(
 
 \item{highlight_years}{years to highlight; detault to mdoel years}
 
-\item{yr_high_lb}{factor variable for highlight years}
-
 \item{var_fact_levels}{factor variable ordering}
+
+\item{yr_high_lb}{factor variable for highlight years}
 }
 \value{
 ggplot of relevant environmental variables
 }
 \description{
 Title
+}
+\examples{
+# example code
+\dontrun{
+env_all_dat <- CVhelp::env_comp(output="long",dt_rng = c("2010-01-01","2024-12-31"))
+env_all_plt <- CVhelp::get_env_plot(env_all_dat)
+
+}
+
+
 }

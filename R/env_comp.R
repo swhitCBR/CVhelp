@@ -100,7 +100,7 @@ env_comp <- function(
   if(output=="wide"){return(envDat_w)}
   
   envDat_l <- envDat_w %>% 
-    tidyr::pivot_longer(cols = c("VNS","ORB","MID","MSD","CLC","OMT","SWP","CVP","OUT"),names_to = "variable") %>%
+    tidyr::pivot_longer(cols = c("VNS","ORB","MID","MSD","CLC","OMT","SWP","CVP","OUT","X2","EXPORTS"),names_to = "variable") %>%
     dplyr::arrange(variable,Year,WYT,date) 
 
   if(output=="long"){return(envDat_l)}

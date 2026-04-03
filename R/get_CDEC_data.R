@@ -36,7 +36,7 @@ get_CDEC_data <- function(
   
   # https://cdec.water.ca.gov/misc/senslist.html
   
-  stopifnot(output %in% c("wide","long","list"))
+  stopifnot(output %in% c("wide","long","list","url_in"))
   
   paste0(cdec_sites,collapse="%2C") ## '%2C' encoding for comma. See: https://en.wikipedia.org/wiki/Percent-encoding
   url_in <- paste0(
@@ -108,6 +108,7 @@ get_CDEC_data <- function(
 
   # objects that that output="list" returns
   list(
+    "url_in"=url_in,
     "raw_csv"=raw_csv,
     "CDEC_data_unprocessed"=CDEC_data,
     "wide"=CDEC_data_w,
