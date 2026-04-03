@@ -1,2 +1,5 @@
 ^CVhelp\.Rproj$
 ^\.Rproj\.user$
+^CVhelp\.Rcheck$
+^CVhelp.*\.tar\.gz$
+^CVhelp.*\.tgz$
