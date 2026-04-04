@@ -6,7 +6,7 @@
 #' 
 #' @export
 #'
-HOR_CHP_comp <- function(unscaled=FALSE){
+HOR_CHP_comp <- function(z_scale_vars=TRUE){
   load("data/HOR_CHP_mod_dat_ls.RData")
   
   x.df_rem1 <- subset(x.df,#tag!="1232531" &
@@ -51,19 +51,16 @@ HOR_CHP_comp <- function(unscaled=FALSE){
     pattrn=c("X.Intercept.","route.facB.barrier.facTRUE"),
     rplace=c("(Intercept)","route.facB:barrier.facTRUE"))
   
+  if(z_scale_vars){
+    XX_in <- CVhelp::scale_data_cols(
+      repl_tab_in=repl_tab,
+      x.df_SUB_in=x.df_SUB)
+  } else{XX_in <- x.df_SUB }
   
-  
-  XX_in_alt <- CVhelp::scale_data_cols(
-    repl_tab_in=repl_tab,
-    x.df_SUB_in=x.df_SUB)
-  
-  XX_in <- XX_in_alt
+  # XX_in <- XX_in_alt
   # XX_in <- x.df_SUB # uncomment and run here to get unscaled estimates
-  
-  if(unscaled){
-    XX_in <- XX_in_alt
-  }
-    
+  # XX_in <- XX_in_alt
+
   # vector of  4 linear combinations used in only for loop in CPP template
   P_lc_n <- length(c("P1_f1","Lam_f1",
                      "P11_f2f3","P12_f2f3"))
@@ -183,7 +180,7 @@ HOR_CHP_comp <- function(unscaled=FALSE){
   
   out_ls=list("allint_DMs"=allint_DMs,
               "TMB_data_baseline"=TMB_data_baseline,
-              "XX_in"=XX_in_alt,
+              "XX_in"=XX_in,
               "XX_in_w_int_WYT"=XX_in_w_int_WYT)
   
   return(out_ls)
