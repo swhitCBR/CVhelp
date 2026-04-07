@@ -19,6 +19,9 @@ scale_data_cols <- function(
 )
 {
   
+  # scale_cols_ind <- match(colnames(x.df_SUB_in),scale_cols)
+  # XX_in_wattr <- scale(x.df_SUB_in[,scale_cols_ind])
+  
   # scale_cols
   XX_in_wattr <- scale(x.df_SUB_in[,scale_cols])
   var_center_v <- attributes(XX_in_wattr)$`scaled:center`

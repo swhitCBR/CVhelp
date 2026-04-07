@@ -1,14 +1,16 @@
 #' Title
 #'
-#' @param unscaled Logical, use unscaled data 
+#' @param RData_pth_in  path of model data
+#' @param z_scale_vars logical, scale and center variables or not
 #'
 #' @returns named list with vital 
 #' 
 #' @export
 #'
-HOR_CHP_comp <- function(z_scale_vars=TRUE){
-  load("data/HOR_CHP_mod_dat_ls.RData")
+HOR_CHP_comp <- function(RData_pth_in="data/HOR_CHP_mod_dat_ls.RData",z_scale_vars=TRUE){
+  load(RData_pth_in)
   
+  # ommitting NAs
   x.df_rem1 <- subset(x.df,#tag!="1232531" &
                       !is.na(det.pred.qomt.rms))
   
@@ -51,11 +53,20 @@ HOR_CHP_comp <- function(z_scale_vars=TRUE){
     pattrn=c("X.Intercept.","route.facB.barrier.facTRUE"),
     rplace=c("(Intercept)","route.facB:barrier.facTRUE"))
   
+  scl_var_nms <- c("flength","Tmsd.hor.7dadm","log.VNS.hor.5","SWP.hor.5" ,"CVP.hor.5","Qomt.hor.1net","Tclc.hor.3")
+  
   if(z_scale_vars){
     XX_in <- CVhelp::scale_data_cols(
       repl_tab_in=repl_tab,
       x.df_SUB_in=x.df_SUB)
-  } else{XX_in <- x.df_SUB }
+  } else{
+    XX_in <- x.df_SUB
+    var_scl_info_tmp <- list("scaled_vars" = scl_var_nms,
+                         "center" = rep(0,length(scl_var_nms)),
+                         "scale" =  rep(1,length(scl_var_nms)))
+    attributes(XX_in) <- c(attributes(XX_in), var_scl_info_tmp)
+  }
+  
   
   # XX_in <- XX_in_alt
   # XX_in <- x.df_SUB # uncomment and run here to get unscaled estimates
@@ -175,8 +186,11 @@ HOR_CHP_comp <- function(z_scale_vars=TRUE){
                       ,1,paste0,collapse="")
   
   # extracting column ids based on vectors that represent design matrices
-  get_DM_col_inds(allint_DMs[1])
-  get_DM_col_inds(allint_DMs[1024])
+  # get_DM_col_inds(allint_DMs[1])
+  # get_DM_col_inds(allint_DMs[1024])
+  
+  if(!z_scale_vars){attributes(XX_in) <- c(attributes(XX_in), var_scl_info_tmp)}
+  
   
   out_ls=list("allint_DMs"=allint_DMs,
               "TMB_data_baseline"=TMB_data_baseline,
