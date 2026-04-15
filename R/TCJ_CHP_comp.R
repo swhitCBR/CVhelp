@@ -8,9 +8,6 @@
 #' @export
 #'
 TCJ_CHP_comp <- function(
-    # XX_in
-    # ,
-  z_scale_vars,
   sdat.det.in,
   lvec.tcj_ls_in,
     x.df
