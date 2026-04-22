@@ -5,3 +5,4 @@
 CVhelp.Rcheck/
 CVhelp*.tar.gz
 CVhelp*.tgz
+inst/doc

@@ -4,10 +4,18 @@
 \alias{HOR_CHP_comp}
 \title{Title}
 \usage{
-HOR_CHP_comp(unscaled = FALSE)
+HOR_CHP_comp(
+  RData_pth_in = "data/HOR_CHP_mod_dat_ls.RData",
+  z_scale_vars = TRUE
+)
 }
 \arguments{
-\item{unscaled}{Logical, use unscaled data}
+\item{RData_pth_in}{path of model data}
+
+\item{z_scale_vars}{logical, scale and center variables or not}
+}
+\value{
+named list with vital
 }
 \description{
 Title
