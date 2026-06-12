@@ -5,7 +5,6 @@
 #' @returns annual summary of water year type and HOR barrier conditions
 #' @export
 #'
-#' @examples
 get_ann_HORbar_WYT_data <- function(
     dt_rng_in = c("2011-01-01", "2024-12-31")  
   ){

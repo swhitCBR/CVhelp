@@ -1,3 +1,4 @@
+#' @title NA substitution using moving average
 #' @description Substitute variable specific moving averages for daily values
 #'
 #' @param DF_w_in dataframe with columns to be replaced by moving averages

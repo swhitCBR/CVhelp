@@ -3,3 +3,4 @@
 ^CVhelp\.Rcheck$
 ^CVhelp.*\.tar\.gz$
 ^CVhelp.*\.tgz$
+^LICENSE\.md$
