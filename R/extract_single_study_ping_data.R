@@ -20,36 +20,36 @@ extract_single_study_ping_data <- function(study,
 ){
   # extracting data group (dg) vector
   dg = tbl(db, "studies") %>%
-    filter(studyID == study) %>%
+    filter(.data$studyID == study) %>%
     collect() %>% 
-    pull(data_group)
+    pull(.data$data_group)
   
   # filtering by data group and creating table to match deployments (depID) with general locations (gen_loc)
   gen_locs <-  tbl(db, "deploys") %>%
-    filter(data_group == dg) %>%
+    filter(.data$data_group == dg) %>%
     collect() %>%
-    dplyr::select(depID, gen_loc)
+    dplyr::select(.data$depID, .data$gen_loc)
   
   rls <- tbl(db, "rls") %>%
-    filter(studyID == study) %>%
+    filter(.data$studyID == study) %>%
     collect() %>%
-    mutate(releaseDT_UTC  = lubridate::ymd_hms(releaseDT_UTC ))
+    mutate(releaseDT_UTC  = lubridate::ymd_hms(.data$releaseDT_UTC ))
   
   rel_loc <- tbl(db, "release_locs") %>% 
     collect() %>%
-    filter(rel_loc %in% (rls %>% pull(rel_loc)) )
+    filter(.data$rel_loc %in% (rls %>% pull(rel_loc)) )
   
   dat <- tbl(db, "detection") %>%
-    filter(studyID == study) %>%
+    filter(.data$studyID == study) %>%
     collect() %>%
-    left_join(gen_locs %>%
-                dplyr::select(depID, gen_loc)) %>%
-    filter(!is.na(gen_loc)) %>%
-    mutate(detectDT_UTC = lubridate::ymd_hms(detectDT_UTC))
+    left_join(.data$gen_locs %>%
+                dplyr::select(.data$depID, .data$gen_loc)) %>%
+    filter(!is.na(.data$gen_loc)) %>%
+    mutate(detectDT_UTC = lubridate::ymd_hms(.data$detectDT_UTC))
   
   gen_loc_sub <- gen_locs %>% 
     collect() %>%
-    filter(depID %in% (dat %>% pull(depID)) )
+    filter(.data$depID %in% (dat %>% pull(.data$depID)) )
   
   if(is.null(start_time))
     start_time = min(dat$detectDT_UTC)
