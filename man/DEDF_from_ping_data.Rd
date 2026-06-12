@@ -6,7 +6,7 @@
 \usage{
 DEDF_from_ping_data(
   dat_in,
-  max_delay = ubridate::hours(1),
+  max_delay = lubridate::hours(1),
   min_detect = 2,
   start_time = NULL,
   end_time = NULL

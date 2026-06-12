@@ -4,8 +4,7 @@ Description: This package stores functions for accessing and compiling daily env
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: AGPL (>= 3)
 Encoding: UTF-8
 Depends: R (>= 4.1.0)
 Imports:
