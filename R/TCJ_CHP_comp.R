@@ -120,15 +120,15 @@ TCJ_CHP_comp <- function(
     "VNS.tcj",
     "CVP.tcj.4",
     "SWP.tcj.4",
-    "Tmsd.tcj.7dadm",
+    "Tmsd.tcj.7dadm"
     ),names(XX_in))
   S_col_add_ids <- c(BASIC_IND_COLS,MAIN_EFFECT_IDS)
 
   # # additive design matrix
   
   # log transform vns a head of everything
-  XX_in[,"log.VNS.tcj"] <- log(XX_in[,"log.VNS.tcj"])
   colnames(XX_in)[colnames(XX_in)=="VNS.tcj"]="log.VNS.tcj"
+  XX_in[,"log.VNS.tcj"] <- log(XX_in[,"log.VNS.tcj"])
   
   if(z_scale_vars){
     
