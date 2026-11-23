@@ -3,10 +3,12 @@
 #' @param DF_w_in daily env data 
 #' @param col_inspect columns to check for NAs
 #'
-#' @returns imputed wide-format dataframe that was input, but with NA valeus replaced with 3-day, 2-sided moving average
+#' @returns imputed wide-format dataframe that was input, but with NA values replaced with 3-day, 2-sided moving average.
+#' If there are no NAs in `col_inspect`, the input is returned unchanged.
 #' @export
 #'
 impute_daily_vals <- function(DF_w_in,col_inspect=c("ORB","MID","OMT","MSD","CLC")){
+  DF_w_orig <- DF_w_in
   nm_ord <- names(DF_w_in)
   # print(head(DF_w_in))
   tmpDF <- DF_w_in[,-which(names(DF_w_in) %in% col_inspect)]
@@ -14,7 +16,7 @@ impute_daily_vals <- function(DF_w_in,col_inspect=c("ORB","MID","OMT","MSD","CLC
   DF_w_in <- DF_w_in[,col_inspect]
   # print(head(DF_w_in))
   whch_na_chk= which(is.na(DF_w_in),arr.ind = T)
-  if(nrow(whch_na_chk)<1){return(NULL)}
+  if(nrow(whch_na_chk)<1){return(DF_w_orig)}
   # return(which(is.na(DF_w_in),arr.ind = T))
   imp_cols <- names(DF_w_in)[unique(which(is.na(DF_w_in),arr.ind = T)[,2])]
   message("imputed values for: ",paste(imp_cols,collapse=", "))

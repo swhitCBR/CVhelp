@@ -16,8 +16,9 @@ Imports:
   imputeTS,
   ggplot2
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Suggests: 
     knitr,
+    openxlsx,
     rmarkdown
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.1.1

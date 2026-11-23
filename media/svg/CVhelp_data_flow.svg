@@ -1,0 +1,205 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 800" width="1500" height="800" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+    <style>
+      .src  { fill:#dbeafe; stroke:#2563eb; stroke-width:1.5; }
+      .fn   { fill:#dcfce7; stroke:#16a34a; stroke-width:1.5; }
+      .obj  { fill:#fef3c7; stroke:#d97706; stroke-width:1.5; }
+      .out  { fill:#e5e7eb; stroke:#4b5563; stroke-width:2; }
+      .grp  { fill:none; stroke:#999; stroke-width:1.5; stroke-dasharray:6 4; }
+      .ln   { stroke:#555; stroke-width:1.5; fill:none; marker-end:url(#arr); }
+      .t    { fill:#111; }
+      .tb   { fill:#111; font-weight:bold; }
+      .ts   { fill:#444; font-size:11px; }
+      .hd   { fill:#111; font-weight:bold; font-size:15px; }
+    </style>
+  </defs>
+
+  <text x="750" y="26" text-anchor="middle" font-size="20" font-weight="bold" class="t">CVhelp: default env_comp() data compilation</text>
+
+  <!-- column headers -->
+  <text x="130" y="60" text-anchor="middle" class="hd">External sources</text>
+  <text x="405" y="60" text-anchor="middle" class="hd">Retrieval functions</text>
+  <text x="675" y="60" text-anchor="middle" class="hd">Raw objects</text>
+  <text x="955" y="60" text-anchor="middle" class="hd">Assembly (in env_comp)</text>
+  <text x="1255" y="60" text-anchor="middle" class="hd">Post-processing</text>
+
+  <!-- group box for env_comp -->
+  <rect x="820" y="72" width="270" height="640" rx="8" class="grp"/>
+
+  <!-- SOURCES -->
+  <rect x="20" y="90" width="220" height="80" rx="6" class="src"/>
+  <text x="130" y="115" text-anchor="middle" class="tb">CDEC CSV servlet</text>
+  <text x="130" y="133" text-anchor="middle" class="ts">stations CLC, MSD</text>
+  <text x="130" y="148" text-anchor="middle" class="ts">sensors 25 / 146, daily</text>
+
+  <rect x="20" y="215" width="220" height="80" rx="6" class="src"/>
+  <text x="130" y="240" text-anchor="middle" class="tb">USGS Water Data API</text>
+  <text x="130" y="258" text-anchor="middle" class="ts">11303500 (VNS, 00060)</text>
+  <text x="130" y="273" text-anchor="middle" class="ts">11313405 (ORB), 11312676 (MID), 72137</text>
+
+  <rect x="20" y="340" width="220" height="80" rx="6" class="src"/>
+  <text x="130" y="365" text-anchor="middle" class="tb">CDEC WSIHIST page</text>
+  <text x="130" y="383" text-anchor="middle" class="ts">water year type report</text>
+  <text x="130" y="398" text-anchor="middle" class="ts">(HTML, scraped)</text>
+
+  <rect x="20" y="465" width="220" height="80" rx="6" class="src"/>
+  <text x="130" y="490" text-anchor="middle" class="tb">CNRA Dayflow CSVs</text>
+  <text x="130" y="508" text-anchor="middle" class="ts">data.cnra.ca.gov datastore</text>
+  <text x="130" y="523" text-anchor="middle" class="ts">hard-coded URLs, 1985-2025</text>
+
+  <rect x="20" y="590" width="220" height="80" rx="6" class="src" stroke-dasharray="5 3"/>
+  <text x="130" y="615" text-anchor="middle" class="tb">HOR barrier schedule</text>
+  <text x="130" y="633" text-anchor="middle" class="ts">hard-coded table in package</text>
+  <text x="130" y="648" text-anchor="middle" class="ts">(no live download, 1992-2018)</text>
+
+  <!-- FETCH FUNCTIONS -->
+  <rect x="290" y="90" width="230" height="80" rx="6" class="fn"/>
+  <text x="405" y="115" text-anchor="middle" class="tb">get_CDEC_data()</text>
+  <text x="405" y="133" text-anchor="middle" class="ts">read.csv; DEG_F to DEG_C</text>
+  <text x="405" y="148" text-anchor="middle" class="ts">(fah_to_cel)</text>
+
+  <rect x="290" y="215" width="230" height="80" rx="6" class="fn"/>
+  <text x="405" y="240" text-anchor="middle" class="tb">get_USGS_data()</text>
+  <text x="405" y="258" text-anchor="middle" class="ts">dataRetrieval::</text>
+  <text x="405" y="273" text-anchor="middle" class="ts">read_waterdata_daily, per site</text>
+
+  <rect x="290" y="340" width="230" height="80" rx="6" class="fn"/>
+  <text x="405" y="365" text-anchor="middle" class="tb">get_WYT_data()</text>
+  <text x="405" y="383" text-anchor="middle" class="ts">rvest + string parsing</text>
+  <text x="405" y="398" text-anchor="middle" class="ts">(basin SJ default)</text>
+
+  <rect x="290" y="465" width="230" height="80" rx="6" class="fn"/>
+  <text x="405" y="488" text-anchor="middle" class="tb">get_dayflow_data()</text>
+  <text x="405" y="505" text-anchor="middle" class="ts">loops years, calls</text>
+  <text x="405" y="520" text-anchor="middle" class="ts">get_CNRA_dayflow_by_year()</text>
+  <text x="405" y="535" text-anchor="middle" class="ts">then date filter</text>
+
+  <rect x="290" y="590" width="230" height="80" rx="6" class="fn"/>
+  <text x="405" y="615" text-anchor="middle" class="tb">get_HOR_barrier_data()</text>
+  <text x="405" y="633" text-anchor="middle" class="ts">get_barrier_strt_stop()</text>
+  <text x="405" y="648" text-anchor="middle" class="ts">expands to daily TRUE/FALSE</text>
+
+  <!-- RAW OBJECTS -->
+  <rect x="570" y="90" width="210" height="80" rx="6" class="obj"/>
+  <text x="675" y="115" text-anchor="middle" class="tb">CDEC_env_raw</text>
+  <text x="675" y="133" text-anchor="middle" class="ts">wide: date, DOY, CLC, MSD</text>
+  <text x="675" y="148" text-anchor="middle" class="ts">(deg C)</text>
+
+  <rect x="570" y="215" width="210" height="80" rx="6" class="obj"/>
+  <text x="675" y="240" text-anchor="middle" class="tb">USGS_env_raw</text>
+  <text x="675" y="258" text-anchor="middle" class="ts">list of data frames:</text>
+  <text x="675" y="273" text-anchor="middle" class="ts">VNS, ORB, MID (date, value)</text>
+
+  <rect x="570" y="340" width="210" height="80" rx="6" class="obj"/>
+  <text x="675" y="365" text-anchor="middle" class="tb">CDEC_wyt_class_raw</text>
+  <text x="675" y="383" text-anchor="middle" class="ts">Year, ind, wyt, WYT</text>
+
+  <rect x="570" y="465" width="210" height="80" rx="6" class="obj"/>
+  <text x="675" y="490" text-anchor="middle" class="tb">get_dayflow_raw</text>
+  <text x="675" y="508" text-anchor="middle" class="ts">date, SWP, CVP, OUT,</text>
+  <text x="675" y="523" text-anchor="middle" class="ts">EXPORTS, X2</text>
+
+  <rect x="570" y="590" width="210" height="80" rx="6" class="obj"/>
+  <text x="675" y="615" text-anchor="middle" class="tb">HOR_barrier_raw</text>
+  <text x="675" y="633" text-anchor="middle" class="ts">date, barrierTF</text>
+
+  <!-- ASSEMBLY -->
+  <rect x="835" y="90" width="240" height="75" rx="6" class="obj"/>
+  <text x="955" y="113" text-anchor="middle" class="tb">full_dt_arr</text>
+  <text x="955" y="131" text-anchor="middle" class="ts">daily date grid from dt_rng</text>
+  <text x="955" y="146" text-anchor="middle" class="ts">+ Year, DOY; filter DOY_rng (1:250)</text>
+
+  <rect x="835" y="260" width="240" height="140" rx="6" class="obj"/>
+  <text x="955" y="283" text-anchor="middle" class="tb">envDat_w (joined)</text>
+  <text x="955" y="302" text-anchor="middle" class="ts">left_join onto full_dt_arr</text>
+  <text x="955" y="317" text-anchor="middle" class="ts">by Year (WYT) or date (rest)</text>
+  <text x="955" y="335" text-anchor="middle" class="ts">OMT = ORB + MID</text>
+  <text x="955" y="350" text-anchor="middle" class="ts">MSD outside 3-30 set to NA</text>
+  <text x="955" y="368" text-anchor="middle" class="ts">cols: WYT, VNS, ORB, MID, OMT, MSD,</text>
+  <text x="955" y="383" text-anchor="middle" class="ts">CLC, barrierTF, SWP, CVP, OUT, EXPORTS, X2</text>
+
+  <rect x="835" y="470" width="240" height="95" rx="6" class="obj"/>
+  <text x="955" y="493" text-anchor="middle" class="tb">missing_env_raw / _summ</text>
+  <text x="955" y="511" text-anchor="middle" class="ts">NA locations and per-site,</text>
+  <text x="955" y="526" text-anchor="middle" class="ts">per-year counts; message of</text>
+  <text x="955" y="541" text-anchor="middle" class="ts">% missing (before imputation)</text>
+
+  <!-- POST-PROCESSING -->
+  <rect x="1140" y="90" width="230" height="95" rx="6" class="fn"/>
+  <text x="1255" y="113" text-anchor="middle" class="tb">impute_daily_vals()</text>
+  <text x="1255" y="131" text-anchor="middle" class="ts">NAs in ORB, MID, OMT, MSD, CLC</text>
+  <text x="1255" y="146" text-anchor="middle" class="ts">filled with 3-day centered MA</text>
+  <text x="1255" y="161" text-anchor="middle" class="ts">(imputeTS::na_ma); if impute_daily_vals=TRUE</text>
+
+  <rect x="1140" y="225" width="230" height="75" rx="6" class="fn"/>
+  <text x="1255" y="248" text-anchor="middle" class="tb">log transform</text>
+  <text x="1255" y="266" text-anchor="middle" class="ts">log() of VNS and OUT</text>
+  <text x="1255" y="281" text-anchor="middle" class="ts">(log_trans default)</text>
+
+  <rect x="1140" y="340" width="230" height="95" rx="6" class="fn"/>
+  <text x="1255" y="363" text-anchor="middle" class="tb">sub_MA_data()</text>
+  <text x="1255" y="381" text-anchor="middle" class="ts">centered MA replaces values:</text>
+  <text x="1255" y="396" text-anchor="middle" class="ts">CLC 3d, VNS 5d, SWP 5d,</text>
+  <text x="1255" y="411" text-anchor="middle" class="ts">CVP 5d, MSD 7d; edges filled; if sub_MA_data=TRUE</text>
+
+  <rect x="1140" y="480" width="230" height="75" rx="6" class="out"/>
+  <text x="1255" y="503" text-anchor="middle" class="tb">envDat_w (default return)</text>
+  <text x="1255" y="521" text-anchor="middle" class="ts">output = "wide"</text>
+  <text x="1255" y="536" text-anchor="middle" class="ts">daily wide data frame</text>
+
+  <rect x="1140" y="590" width="230" height="55" rx="6" class="out"/>
+  <text x="1255" y="613" text-anchor="middle" class="tb">envDat_l</text>
+  <text x="1255" y="631" text-anchor="middle" class="ts">output = "long" (pivot_longer)</text>
+
+  <rect x="1140" y="665" width="230" height="75" rx="6" class="out"/>
+  <text x="1255" y="688" text-anchor="middle" class="tb">output = "list"</text>
+  <text x="1255" y="706" text-anchor="middle" class="ts">full_dt_arr, envDat_w, envDat_l,</text>
+  <text x="1255" y="721" text-anchor="middle" class="ts">missing_env_summ, missing_env_raw</text>
+
+  <!-- ARROWS: source -> function -> raw -->
+  <path class="ln" d="M240,130 H288"/>
+  <path class="ln" d="M240,255 H288"/>
+  <path class="ln" d="M240,380 H288"/>
+  <path class="ln" d="M240,505 H288"/>
+  <path class="ln" d="M240,630 H288"/>
+
+  <path class="ln" d="M520,130 H568"/>
+  <path class="ln" d="M520,255 H568"/>
+  <path class="ln" d="M520,380 H568"/>
+  <path class="ln" d="M520,505 H568"/>
+  <path class="ln" d="M520,630 H568"/>
+
+  <!-- raw -> joined -->
+  <path class="ln" d="M780,130 C805,130 805,300 833,300"/>
+  <path class="ln" d="M780,255 C805,255 805,320 833,320"/>
+  <path class="ln" d="M780,380 C805,380 805,340 833,340"/>
+  <path class="ln" d="M780,505 C805,505 805,360 833,360"/>
+  <path class="ln" d="M780,630 C805,630 805,380 833,380"/>
+
+  <!-- grid -> joined -->
+  <path class="ln" d="M955,165 V258"/>
+  <!-- joined -> missing -->
+  <path class="ln" d="M955,400 V468"/>
+
+  <!-- joined -> impute -->
+  <path class="ln" d="M1075,300 C1105,300 1105,137 1138,137"/>
+  <!-- impute -> log -> MA -> out -->
+  <path class="ln" d="M1255,185 V223"/>
+  <path class="ln" d="M1255,300 V338"/>
+  <path class="ln" d="M1255,435 V478"/>
+  <path class="ln" d="M1255,555 V588"/>
+  <path class="ln" d="M1255,645 V663"/>
+
+  <!-- legend -->
+  <g transform="translate(20,730)">
+    <rect x="0" y="0" width="18" height="14" class="src"/><text x="26" y="12" class="t">External source</text>
+    <rect x="150" y="0" width="18" height="14" class="fn"/><text x="176" y="12" class="t">Function</text>
+    <rect x="250" y="0" width="18" height="14" class="obj"/><text x="276" y="12" class="t">Intermediate object</text>
+    <rect x="410" y="0" width="18" height="14" class="out"/><text x="436" y="12" class="t">Output</text>
+    <rect x="510" y="0" width="18" height="14" class="src" stroke-dasharray="3 2"/><text x="536" y="12" class="t">Hard-coded (no download)</text>
+  </g>
+  <text x="20" y="775" class="ts">Order in env_comp(): fetch -> join -> NA summary -> MSD QC -> impute -> log transform -> moving-average substitution -> reshape per output.</text>
+</svg>

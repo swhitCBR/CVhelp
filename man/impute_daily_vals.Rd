@@ -12,7 +12,8 @@ impute_daily_vals(DF_w_in, col_inspect = c("ORB", "MID", "OMT", "MSD", "CLC"))
 \item{col_inspect}{columns to check for NAs}
 }
 \value{
-imputed wide-format dataframe that was input, but with NA valeus replaced with 3-day, 2-sided moving average
+imputed wide-format dataframe that was input, but with NA values replaced with 3-day, 2-sided moving average.
+If there are no NAs in \code{col_inspect}, the input is returned unchanged.
 }
 \description{
 Title
